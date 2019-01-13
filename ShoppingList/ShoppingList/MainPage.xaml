@@ -5,6 +5,9 @@
              x:Class="ShoppingList.MainPage"
 			 BackgroundColor="WhiteSmoke">
 	<StackLayout>
-		<Image Source="ic_shopping_cart" />
+		<Image Source="ic_shopping_cart" VerticalOptions="EndAndExpand" Margin="0,0,0,10" />
+		<Label Text="Your cart is empty!" TextColor="Gray" FontSize="Large" HorizontalTextAlignment="Center" Margin="0,0,0,50" />
+		<Label Text="Add items to your cart" TextColor="Gray" FontSize="Medium" HorizontalTextAlignment="Center" Margin="0,0,0,10" />
+		<Button Text="Add new item" TextColor="White" BackgroundColor="#007ACC" VerticalOptions="StartAndExpand" HorizontalOptions="Center" />
 	</StackLayout>
 </ContentPage>
