@@ -14,5 +14,12 @@
 				<Stepper Minimum="1" Maximum="100" Increment="1" HorizontalOptions="Fill" />
 			</StackLayout>
 		</StackLayout>
+		<StackLayout>
+			<Label Text="Price" />
+			<StackLayout Orientation="Horizontal">
+				<Entry Text="0" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" />
+				<Label Text="€" FontSize="Large" VerticalOptions="Center" /> <!-- TODO: configure currency -->
+			</StackLayout>
+		</StackLayout>
 	</StackLayout>
 </ContentPage>
