@@ -7,5 +7,12 @@
 			<Label Text="Product name" />
 			<Entry Placeholder="Product" />
 		</StackLayout>
+		<StackLayout>
+			<Label Text="Quantity" />
+			<StackLayout Orientation="Horizontal">
+				<Entry Text="1" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" />
+				<Stepper Minimum="1" Maximum="100" Increment="1" HorizontalOptions="Fill" />
+			</StackLayout>
+		</StackLayout>
 	</StackLayout>
 </ContentPage>
