@@ -25,5 +25,9 @@
 			<Label Text="SUBTOTAL" HorizontalTextAlignment="Center" />
 			<Label Text="0 €" FontSize="Large" HorizontalTextAlignment="Center" /> <!-- TODO: binding + string format -->
 		</StackLayout>
+		<StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="EndAndExpand">
+			<Button Text="OK" />
+			<Button Text="Cancel" />
+		</StackLayout>
 	</StackLayout>
 </ContentPage>
