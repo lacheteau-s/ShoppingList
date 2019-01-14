@@ -1,31 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShoppingList.NewItemModalPage">
-	<StackLayout>
+             x:Class="ShoppingList.NewItemModalPage"
+			 BackgroundColor="WhiteSmoke">
+	<StackLayout Padding="20" Spacing="20">
 		<StackLayout>
-			<Label Text="Product name" />
+			<Label Text="Product name" TextColor="Gray" />
 			<Entry Placeholder="Product" />
 		</StackLayout>
 		<StackLayout>
-			<Label Text="Quantity" />
+			<Label Text="Quantity" TextColor="Gray" />
 			<StackLayout Orientation="Horizontal">
 				<Entry Text="1" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" />
 				<Stepper Minimum="1" Maximum="100" Increment="1" HorizontalOptions="Fill" />
 			</StackLayout>
 		</StackLayout>
 		<StackLayout>
-			<Label Text="Price" />
+			<Label Text="Price" TextColor="Gray" />
 			<StackLayout Orientation="Horizontal">
 				<Entry Text="0" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" />
-				<Label Text="€" FontSize="Large" VerticalOptions="Center" /> <!-- TODO: configure currency -->
+				<Label Text="€" FontSize="Large" TextColor="Gray" VerticalOptions="Center" /> <!-- TODO: configure currency -->
 			</StackLayout>
 		</StackLayout>
-		<StackLayout>
-			<Label Text="SUBTOTAL" HorizontalTextAlignment="Center" />
-			<Label Text="0 €" FontSize="Large" HorizontalTextAlignment="Center" /> <!-- TODO: binding + string format -->
+		<StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+			<Label Text="SUBTOTAL" TextColor="Gray" HorizontalTextAlignment="Center" />
+			<Label Text="0 €" TextColor="Gray" FontSize="Large" HorizontalTextAlignment="Center" /> <!-- TODO: binding + string format -->
 		</StackLayout>
-		<StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="EndAndExpand">
+		<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 			<Button Text="OK" />
 			<Button Text="Cancel" />
 		</StackLayout>
