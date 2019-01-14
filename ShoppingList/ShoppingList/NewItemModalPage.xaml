@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ShoppingList.NewItemModalPage">
 	<StackLayout>
-
+		<StackLayout>
+			<Label Text="Product name" />
+			<Entry Placeholder="Product" />
+		</StackLayout>
 	</StackLayout>
 </ContentPage>
