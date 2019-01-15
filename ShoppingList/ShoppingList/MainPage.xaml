@@ -3,12 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ShoppingList"
              x:Class="ShoppingList.MainPage"
+			 xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
 			 BackgroundColor="WhiteSmoke">
 	<StackLayout>
 		<Image Source="ic_shopping_cart" VerticalOptions="EndAndExpand" Margin="0,0,0,10" />
 		<Label Text="Your cart is empty!" TextColor="Gray" FontSize="Large" HorizontalTextAlignment="Center" Margin="0,0,0,50" />
 		<Label Text="Add items to your cart" TextColor="Gray" FontSize="Medium" HorizontalTextAlignment="Center" Margin="0,0,0,10" />
 		<Button Text="Add new item" TextColor="White" BackgroundColor="#007ACC" VerticalOptions="StartAndExpand" HorizontalOptions="Center"
+				WidthRequest="130" HeightRequest="65"
+				android:Button.UseDefaultPadding="True" android:Button.UseDefaultShadow="True"
 				Clicked="OnAddNewItemClicked" />
 	</StackLayout>
 </ContentPage>
