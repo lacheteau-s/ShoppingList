@@ -29,8 +29,8 @@
 			<Label Text="0 €" TextColor="Gray" FontSize="Large" HorizontalTextAlignment="Center" /> <!-- TODO: binding + string format -->
 		</StackLayout>
 		<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-			<Button Text="OK" />
-			<Button Text="Cancel" />
+			<Button Text="OK" TextColor="White" BackgroundColor="#007ACC" HeightRequest="50" android:Button.UseDefaultPadding="True" android:Button.UseDefaultShadow="True" />
+			<Button Text="Cancel" TextColor="White" BackgroundColor="#007ACC" HeightRequest="50" android:Button.UseDefaultPadding="True" android:Button.UseDefaultShadow="True" />
 		</StackLayout>
 	</StackLayout>
 </ContentPage>
