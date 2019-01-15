@@ -13,5 +13,12 @@ namespace ShoppingList
 		{
 			InitializeComponent();
 		}
+
+		private async void OnAddNewItemClicked(object sender, EventArgs e)
+		{
+			var page = new NewItemModalPage();
+
+			await Navigation.PushModalAsync(page);
+		}
 	}
 }
