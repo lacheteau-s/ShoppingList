@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ShoppingList
+namespace ShoppingList.Views
 {
 	public partial class HomePage : ContentPage
 	{
