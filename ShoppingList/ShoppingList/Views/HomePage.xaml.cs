@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoppingList.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,12 @@ namespace ShoppingList.Views
 {
 	public partial class HomePage : ContentPage
 	{
+        private HomeViewModel _viewModel => (HomeViewModel)BindingContext;
+
 		public HomePage()
 		{
 			InitializeComponent();
+            BindingContext = new HomeViewModel();
 		}
 
 		private async void OnAddNewItemClicked(object sender, EventArgs e)

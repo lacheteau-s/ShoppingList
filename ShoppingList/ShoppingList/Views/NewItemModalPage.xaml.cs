@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoppingList.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,12 @@ namespace ShoppingList.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewItemModalPage : ContentPage
 	{
+        private NewItemModalViewModel _viewModel => (NewItemModalViewModel)BindingContext;
+
 		public NewItemModalPage ()
 		{
-			InitializeComponent ();
+			InitializeComponent();
+            BindingContext = new NewItemModalViewModel();
 		}
 	}
 }
