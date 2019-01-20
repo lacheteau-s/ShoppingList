@@ -26,9 +26,9 @@ namespace ShoppingList.Views
 			_viewModel.OnOk();
         }
 
-        public void OnCancelClicked(object sender, EventArgs e)
+        public async void OnCancelClicked(object sender, EventArgs e)
         {
-			_viewModel.OnCancel();
+			await Navigation.PopModalAsync();
         }
 
 		public void OnIncrementQuantityClicked(object sender, EventArgs e)

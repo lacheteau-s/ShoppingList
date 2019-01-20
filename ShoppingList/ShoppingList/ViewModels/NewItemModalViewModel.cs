@@ -48,11 +48,6 @@ namespace ShoppingList.ViewModels
 			};
 		}
 
-		public void OnCancel()
-		{
-
-		}
-
 		public void IncrementQuantity()
 		{
 			if (Quantity < 100)
