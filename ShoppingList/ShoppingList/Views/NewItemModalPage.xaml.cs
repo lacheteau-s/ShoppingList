@@ -20,5 +20,15 @@ namespace ShoppingList.Views
 			InitializeComponent();
             BindingContext = new NewItemModalViewModel();
 		}
+
+        public void OnOkClicked(object sender, EventArgs e)
+        {
+			_viewModel.OnOk();
+        }
+
+        public void OnCancelClicked(object sender, EventArgs e)
+        {
+			_viewModel.OnCancel();
+        }
 	}
 }
