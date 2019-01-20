@@ -53,6 +53,18 @@ namespace ShoppingList.ViewModels
 
 		}
 
+		public void IncrementQuantity()
+		{
+			if (Quantity < 100)
+				Quantity++;
+		}
+
+		public void DecrementQuantity()
+		{
+			if (Quantity > 1)
+				Quantity--;
+		}
+
 		protected override void RegisterDependencies()
 		{
 			RegisterDependency(nameof(Quantity), nameof(Subtotal));

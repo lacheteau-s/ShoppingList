@@ -30,5 +30,15 @@ namespace ShoppingList.Views
         {
 			_viewModel.OnCancel();
         }
+
+		public void OnIncrementQuantityClicked(object sender, EventArgs e)
+		{
+			_viewModel.IncrementQuantity();
+		}
+
+		public void OnDecrementQuantityClicked(object sender, EventArgs e)
+		{
+			_viewModel.DecrementQuantity();
+		}
 	}
 }

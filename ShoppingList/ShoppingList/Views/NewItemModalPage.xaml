@@ -12,9 +12,13 @@
 		<StackLayout>
 			<Label Text="Quantity" TextColor="Gray" />
 			<StackLayout Orientation="Horizontal">
-				<Button Image="ic_plus" BackgroundColor="Gray" HeightRequest="50" android:Button.UseDefaultPadding="True" android:Button.UseDefaultShadow="True" />
+				<Button Image="ic_plus" BackgroundColor="Gray" HeightRequest="50"
+						android:Button.UseDefaultPadding="True" android:Button.UseDefaultShadow="True"
+						Clicked="OnIncrementQuantityClicked"/>
 				<Entry Text="{Binding Quantity}" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" />
-				<Button Image="ic_minus" BackgroundColor="Gray" HeightRequest="50" android:Button.UseDefaultPadding="True" android:Button.UseDefaultShadow="True" />
+				<Button Image="ic_minus" BackgroundColor="Gray" HeightRequest="50"
+						android:Button.UseDefaultPadding="True" android:Button.UseDefaultShadow="True"
+						Clicked="OnDecrementQuantityClicked" />
 			</StackLayout>
 		</StackLayout>
 		<StackLayout>
