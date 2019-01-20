@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoppingList.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,7 @@ namespace ShoppingList
 		{
 			InitializeComponent();
 
-			MainPage = new MainPage();
+			MainPage = new HomePage();
 		}
 
 		protected override void OnStart()

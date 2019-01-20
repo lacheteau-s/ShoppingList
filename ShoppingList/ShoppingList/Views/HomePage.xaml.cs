@@ -1,17 +1,21 @@
-﻿using System;
+﻿using ShoppingList.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ShoppingList
+namespace ShoppingList.Views
 {
-	public partial class MainPage : ContentPage
+	public partial class HomePage : ContentPage
 	{
-		public MainPage()
+        private HomeViewModel _viewModel => (HomeViewModel)BindingContext;
+
+		public HomePage()
 		{
 			InitializeComponent();
+            BindingContext = new HomeViewModel();
 		}
 
 		private async void OnAddNewItemClicked(object sender, EventArgs e)
