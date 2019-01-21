@@ -11,8 +11,14 @@ namespace ShoppingList
 		public App()
 		{
 			InitializeComponent();
+			InitializeIoC();
 
 			MainPage = new HomePage();
+		}
+
+		private void InitializeIoC()
+		{
+			// Add registrations here
 		}
 
 		protected override void OnStart()
