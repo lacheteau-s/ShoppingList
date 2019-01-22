@@ -15,14 +15,14 @@ namespace ShoppingList
 			InitializeComponent();
 			InitializeIoC();
 
-			MainPage = IoC.GetInstance<HomePage>();
+			MainPage = IoC.GetInstance<HomeView>();
 		}
 
 		private void InitializeIoC()
 		{
-			IoC.Register<HomePage>();
+			IoC.Register<HomeView>();
 			IoC.Register<HomeViewModel>();
-			IoC.Register<NewItemModalPage>();
+			IoC.Register<NewItemModalView>();
 			IoC.Register<NewItemModalViewModel>();
 		}
 

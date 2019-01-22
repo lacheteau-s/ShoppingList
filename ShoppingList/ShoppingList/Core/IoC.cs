@@ -57,9 +57,22 @@ namespace ShoppingList.Core
 			return IsRegistered<T>() ? _safeContainer.GetInstance<T>() : null;
 		}
 
+		public static object GetInstance(Type type, bool throwIfUnregistered = true)
+		{
+			if (throwIfUnregistered)
+				return _safeContainer.GetInstance(type);
+
+			return IsRegistered(type) ? _safeContainer.GetInstance(type) : null;
+		}
+
 		public static bool IsRegistered<T>() where T : class
 		{
 			return _safeContainer.GetCurrentRegistrations().Count(p => p.ServiceType == typeof(T)) > 0;
+		}
+
+		public static bool IsRegistered(Type type)
+		{
+			return _safeContainer.GetCurrentRegistrations().Count(p => p.ServiceType == type) > 0;
 		}
 	}
 }
