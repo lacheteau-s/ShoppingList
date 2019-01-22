@@ -15,10 +15,10 @@ namespace ShoppingList.Views
 	{
         private NewItemModalViewModel _viewModel => (NewItemModalViewModel)BindingContext;
 
-		public NewItemModalPage ()
+		public NewItemModalPage (NewItemModalViewModel viewModel)
 		{
 			InitializeComponent();
-            BindingContext = new NewItemModalViewModel();
+			BindingContext = viewModel;
 		}
 
         public void OnOkClicked(object sender, EventArgs e)

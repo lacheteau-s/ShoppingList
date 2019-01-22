@@ -1,4 +1,5 @@
-﻿using ShoppingList.ViewModels;
+﻿using ShoppingList.Core;
+using ShoppingList.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,15 @@ namespace ShoppingList.Views
 	{
         private HomeViewModel _viewModel => (HomeViewModel)BindingContext;
 
-		public HomePage()
+		public HomePage(HomeViewModel viewModel)
 		{
 			InitializeComponent();
-            BindingContext = new HomeViewModel();
+			BindingContext = viewModel;
 		}
 
 		private async void OnAddNewItemClicked(object sender, EventArgs e)
 		{
-			var page = new NewItemModalPage();
+			var page = IoC.GetInstance<NewItemModalPage>();
 
 			await Navigation.PushModalAsync(page);
 		}
