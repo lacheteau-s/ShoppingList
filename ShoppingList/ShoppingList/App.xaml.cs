@@ -1,4 +1,6 @@
-﻿using ShoppingList.Views;
+﻿using ShoppingList.Core;
+using ShoppingList.ViewModels;
+using ShoppingList.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,8 +13,17 @@ namespace ShoppingList
 		public App()
 		{
 			InitializeComponent();
+			InitializeIoC();
 
-			MainPage = new HomePage();
+			MainPage = IoC.GetInstance<HomeView>();
+		}
+
+		private void InitializeIoC()
+		{
+			IoC.Register<HomeView>();
+			IoC.Register<HomeViewModel>();
+			IoC.Register<NewItemModalView>();
+			IoC.Register<NewItemModalViewModel>();
 		}
 
 		protected override void OnStart()

@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShoppingList.Views.NewItemModalPage"
-			 xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-			 BackgroundColor="WhiteSmoke">
-	<StackLayout Padding="20" Spacing="20">
+             x:Class="ShoppingList.Views.NewItemModalView"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:core="clr-namespace:ShoppingList.Core"
+             core:ViewModelLocator.AutoWireViewModel="True"
+             BackgroundColor="WhiteSmoke">
+  <StackLayout Padding="20" Spacing="20">
 		<StackLayout>
 			<Label Text="Product name" TextColor="Gray" />
 			<Entry Placeholder="Product" Text="{Binding ProductName}" />
