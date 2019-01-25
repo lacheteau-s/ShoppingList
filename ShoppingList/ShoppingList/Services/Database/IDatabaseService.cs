@@ -10,7 +10,8 @@ namespace ShoppingList.Services
 	{
 		SQLiteAsyncConnection DbContext { get; }
 
-		void CreateConnection(string path);
+		Task CreateConnectionAsync(string path);
+		Task CloseConnectionAsync();
 		Task CreateTableAsync<T>() where T : class, new();
 	}
 }

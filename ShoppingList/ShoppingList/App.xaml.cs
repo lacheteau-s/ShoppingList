@@ -35,7 +35,7 @@ namespace ShoppingList
 		{
 			var dbService = IoC.GetInstance<IDatabaseService>();
 
-			dbService.CreateConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "shoppingList.db3"));
+			dbService.CreateConnectionAsync(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "shoppingList.db3"));
 			dbService.CreateTableAsync<ProductEntity>();
 		}
 

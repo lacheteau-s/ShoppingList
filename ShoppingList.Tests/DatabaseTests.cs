@@ -1,5 +1,5 @@
-using ShoppingList.Data.Entities;
 using ShoppingList.Services;
+using SQLite;
 using System;
 using System.IO;
 using System.Linq;
@@ -8,41 +8,56 @@ using Xunit;
 
 namespace ShoppingList.Tests
 {
+	[TestCaseOrderer("ShoppingList.Tests.PriorityOrderer", "ShoppingList.Tests")]
 	public class DatabaseTests
 	{
-		private readonly IDatabaseService _dbService = new DatabaseService();
+		private static IDatabaseService _dbService = new DatabaseService();
 		private readonly string _dbPath = Path.Combine(Environment.CurrentDirectory, "testDb.db3");
 
-		[Fact]
-		public void CreateConnection_Success()
+		[Table("Dummy")]
+		private class DummyEntity
 		{
-			CreateConnection();
-
-			Assert.True(File.Exists(_dbPath));
-			// TODO: close (https://github.com/praeclarum/sqlite-net/issues/740)
+			[PrimaryKey, AutoIncrement]
+			public int Id { get; set; }
 		}
 
-		[Fact]
+		[Fact, Priority(0)]
+		public async Task CreateConnection_Success()
+		{
+			if (File.Exists(_dbPath))
+				File.Delete(_dbPath);
+
+			await _dbService.CreateConnectionAsync(_dbPath);
+
+			// Database file won't be created until the connection isn't being used.
+			var conn = _dbService.DbContext.GetConnection();
+
+			Assert.NotNull(conn);
+			Assert.True(File.Exists(_dbPath));
+		}
+
+		[Fact, Priority(1)]
 		public async Task CreateTable_Success()
 		{
-			CreateConnection();
+			await _dbService.CreateTableAsync<DummyEntity>();
 
-			await _dbService.CreateTableAsync<ProductEntity>(); // TODO: Mock/Project agnostic entity
-
-			var table = _dbService.DbContext.TableMappings.SingleOrDefault(t => t.TableName == "Product");
+			var table = _dbService.DbContext
+								  .TableMappings
+								  .SingleOrDefault(t => t.TableName == "Dummy");
 
 			Assert.NotNull(table);
-
-			//File.Delete(_dbPath); // TODO
 		}
 
-		private void CreateConnection()
+		[Fact, Priority(2)]
+		public async Task CloseConnection_Success()
 		{
-			// TODO
-			//if (File.Exists(_dbPath))
-			//	File.Delete(_dbPath);
+			await _dbService.CloseConnectionAsync();
 
-			_dbService.CreateConnection(_dbPath);
+			Assert.Null(_dbService.DbContext);
+
+			File.Delete(_dbPath);
+
+			Assert.False(File.Exists(_dbPath));
 		}
 	}
 }
