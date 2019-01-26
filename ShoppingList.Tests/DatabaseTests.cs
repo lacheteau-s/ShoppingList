@@ -1,4 +1,5 @@
 using ShoppingList.Services;
+using ShoppingList.Tests.Data;
 using SQLite;
 using System;
 using System.IO;
@@ -12,14 +13,7 @@ namespace ShoppingList.Tests
 	public class DatabaseTests
 	{
 		private static IDatabaseService _dbService = new DatabaseService();
-		private readonly string _dbPath = Path.Combine(Environment.CurrentDirectory, "testDb.db3");
-
-		[Table("Dummy")]
-		private class DummyEntity
-		{
-			[PrimaryKey, AutoIncrement]
-			public int Id { get; set; }
-		}
+		private readonly string _dbPath = Path.Combine(Environment.CurrentDirectory, "dbTest.db3");
 
 		[Fact, Priority(0)]
 		public async Task CreateConnection_Success()

@@ -1,4 +1,5 @@
 ﻿using ShoppingList.Core;
+using ShoppingList.Data;
 using ShoppingList.Data.Entities;
 using ShoppingList.Services;
 using ShoppingList.ViewModels;
@@ -29,6 +30,7 @@ namespace ShoppingList
 			IoC.Register<NewItemModalView>();
 			IoC.Register<NewItemModalViewModel>();
 			IoC.RegisterSingleton<IDatabaseService, DatabaseService>();
+			IoC.RegisterSingleton<IAsyncRepository<ProductEntity>, AsyncRepository<ProductEntity>>();
 		}
 
 		private void InitializeDatabase()
