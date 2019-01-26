@@ -1,12 +1,18 @@
-﻿using ShoppingList.Models;
+﻿using ShoppingList.Data;
+using ShoppingList.Data.Entities;
+using ShoppingList.Models;
+using ShoppingList.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ShoppingList.ViewModels
 {
     public class NewItemModalViewModel : ObservableObject
     {
+		private readonly IProductService _productService;
+
         private string _productName;
         private int _quantity;
         private double _price;
@@ -31,21 +37,25 @@ namespace ShoppingList.ViewModels
 
 		public string Subtotal => $"{Quantity * Price} €"; // TODO: currency configuration
 
-		public NewItemModalViewModel()
+		public NewItemModalViewModel(IProductService productService)
 		{
+			_productService = productService;
+
 			ProductName = null;
 			Quantity = 1;
 			Price = 0;
 		}
 
-		public void OnOk()
+		public async void OnOk()
 		{
 			var model = new ProductModel()
 			{
-				ProductName = ProductName,
+				Name = ProductName,
 				Quantity = Quantity,
 				Price = Price
 			};
+
+			await _productService.AddNewProductAsync(model);
 		}
 
 		public void IncrementQuantity()

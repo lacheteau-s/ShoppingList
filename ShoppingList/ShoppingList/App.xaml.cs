@@ -30,6 +30,7 @@ namespace ShoppingList
 			IoC.Register<NewItemModalView>();
 			IoC.Register<NewItemModalViewModel>();
 			IoC.RegisterSingleton<IDatabaseService, DatabaseService>();
+			IoC.RegisterSingleton<IProductService, ProductService>();
 			IoC.RegisterSingleton<IAsyncRepository<ProductEntity>, AsyncRepository<ProductEntity>>();
 		}
 

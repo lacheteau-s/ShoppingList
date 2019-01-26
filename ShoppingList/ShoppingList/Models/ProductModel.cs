@@ -6,7 +6,7 @@ namespace ShoppingList.Models
 {
 	public class ProductModel
 	{
-		public string ProductName { get; set; }
+		public string Name { get; set; }
 
 		public int Quantity { get; set; }
 
