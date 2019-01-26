@@ -6,6 +6,8 @@ using ShoppingList.ViewModels;
 using ShoppingList.Views;
 using System;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,7 +20,6 @@ namespace ShoppingList
 		{
 			InitializeComponent();
 			InitializeIoC();
-			InitializeDatabase();
 
 			MainPage = IoC.GetInstance<HomeView>();
 		}
@@ -34,27 +35,34 @@ namespace ShoppingList
 			IoC.RegisterSingleton<IAsyncRepository<ProductEntity>, AsyncRepository<ProductEntity>>();
 		}
 
-		private void InitializeDatabase()
+		protected override async void OnStart()
+		{
+			await InitializeDatabase();
+		}
+
+		protected override async void OnSleep()
 		{
 			var dbService = IoC.GetInstance<IDatabaseService>();
 
-			dbService.CreateConnectionAsync(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "shoppingList.db3"));
-			dbService.CreateTableAsync<ProductEntity>();
-		}
-
-		protected override void OnStart()
-		{
-			// Handle when your app starts
-		}
-
-		protected override void OnSleep()
-		{
-			// Handle when your app sleeps
+			await dbService.CloseConnectionAsync();
 		}
 
 		protected override void OnResume()
 		{
-			// Handle when your app resumes
+			var dbService = IoC.GetInstance<IDatabaseService>();
+
+			dbService.CreateConnectionAsync(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "shoppingList.db3"));
+		}
+
+		private async Task InitializeDatabase()
+		{
+			var dbService = IoC.GetInstance<IDatabaseService>();
+
+			await dbService.CreateConnectionAsync(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "shoppingList.db3"));
+			var table = dbService.DbContext?.TableMappings.SingleOrDefault(t => t.TableName == "Product");
+
+			if (table == null)
+				await dbService.CreateTableAsync<ProductEntity>();
 		}
 	}
 }
