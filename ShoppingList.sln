@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingList.Android", "Sho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingList", "ShoppingList\ShoppingList\ShoppingList.csproj", "{EC12E57E-9E81-421C-BAB0-47E4FE3AD83E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingList.Tests", "ShoppingList.Tests\ShoppingList.Tests.csproj", "{CB17FC3D-1FDD-49A2-9708-1873E8698DA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{EC12E57E-9E81-421C-BAB0-47E4FE3AD83E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC12E57E-9E81-421C-BAB0-47E4FE3AD83E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EC12E57E-9E81-421C-BAB0-47E4FE3AD83E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CB17FC3D-1FDD-49A2-9708-1873E8698DA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB17FC3D-1FDD-49A2-9708-1873E8698DA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB17FC3D-1FDD-49A2-9708-1873E8698DA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB17FC3D-1FDD-49A2-9708-1873E8698DA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
