@@ -33,6 +33,7 @@ namespace ShoppingList
 			IoC.RegisterSingleton<IDatabaseService, DatabaseService>();
 			IoC.RegisterSingleton<IProductService, ProductService>();
 			IoC.RegisterSingleton<IAsyncRepository<ProductEntity>, AsyncRepository<ProductEntity>>();
+			IoC.RegisterSingleton<IEventDispatcher, EventDispatcher>();
 		}
 
 		protected override async void OnStart()

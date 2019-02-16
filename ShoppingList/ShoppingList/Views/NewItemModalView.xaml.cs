@@ -20,10 +20,21 @@ namespace ShoppingList.Views
 			InitializeComponent();
 		}
 
-        public void OnOkClicked(object sender, EventArgs e)
+        public async void OnOkClicked(object sender, EventArgs e)
         {
-			_viewModel.OnOk();
-        }
+			try
+			{
+				await _viewModel.OnOkAsync();
+			}
+			catch (Exception)
+			{
+				// TODO
+			}
+			finally
+			{
+				await Navigation.PopModalAsync();
+			}
+		}
 
         public async void OnCancelClicked(object sender, EventArgs e)
         {

@@ -20,6 +20,8 @@ namespace ShoppingList.Views
 
 		private async void OnAddNewItemClicked(object sender, EventArgs e)
 		{
+			_viewModel.Subscribe();
+
 			var page = IoC.GetInstance<NewItemModalView>();
 
 			await Navigation.PushModalAsync(page);
