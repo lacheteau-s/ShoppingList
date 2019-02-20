@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoppingList.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -21,7 +22,7 @@ namespace ShoppingList.Core
 			bindable.SetValue(ViewModelLocator.AutoWireViewModelProperty, value);
 		}
 
-		private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)
+		private static async void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)
 		{
 			var view = bindable as Element;
 
@@ -37,7 +38,8 @@ namespace ShoppingList.Core
 			if (viewModelType == null)
 				return;
 
-			var viewModel = IoC.GetInstance(viewModelType);
+			var viewModel = (BaseViewModel)IoC.GetInstance(viewModelType);
+			await viewModel.InitializeAsync(); // TODO: sharpnado initialize async + rm BaseViewModel
 			view.BindingContext = viewModel;
 		}
 	}

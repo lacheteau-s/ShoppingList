@@ -9,5 +9,6 @@ namespace ShoppingList.Services
 	public interface IProductService
 	{
 		Task AddNewProductAsync(ProductModel product);
+		Task<List<ProductModel>> GetSelectedProducts();
 	}
 }

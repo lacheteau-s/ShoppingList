@@ -1,4 +1,5 @@
-﻿using ShoppingList.Data;
+﻿using ShoppingList.Core;
+using ShoppingList.Data;
 using ShoppingList.Data.Entities;
 using ShoppingList.Models;
 using ShoppingList.Services;
@@ -9,9 +10,10 @@ using System.Threading.Tasks;
 
 namespace ShoppingList.ViewModels
 {
-    public class NewItemModalViewModel : ObservableObject
+    public class NewItemModalViewModel : BaseViewModel
     {
 		private readonly IProductService _productService;
+		private readonly IEventDispatcher _eventDispatcher;
 
         private string _productName;
         private int _quantity;
@@ -37,16 +39,17 @@ namespace ShoppingList.ViewModels
 
 		public string Subtotal => $"{Quantity * Price} €"; // TODO: currency configuration
 
-		public NewItemModalViewModel(IProductService productService)
+		public NewItemModalViewModel(IProductService productService, IEventDispatcher eventDispatcher)
 		{
 			_productService = productService;
+			_eventDispatcher = eventDispatcher;
 
 			ProductName = null;
 			Quantity = 1;
 			Price = 0;
 		}
 
-		public async void OnOk()
+		public async Task OnOkAsync()
 		{
 			var model = new ProductModel()
 			{
@@ -56,6 +59,8 @@ namespace ShoppingList.ViewModels
 			};
 
 			await _productService.AddNewProductAsync(model);
+
+			_eventDispatcher.Publish(Events.ItemAdded, model);
 		}
 
 		public void IncrementQuantity()
