@@ -15,8 +15,6 @@ namespace ShoppingList.ViewModels
 		private readonly IEventDispatcher _eventDispatcher;
 		private readonly IProductService _productService;
 
-		public bool IsEmpty => !Products.Any();
-
 		public bool HasItems => Products.Any();
 
 		public ObservableCollection<ProductViewModel> Products { get; set; }
@@ -56,7 +54,6 @@ namespace ShoppingList.ViewModels
 
 		protected override void RegisterDependencies()
 		{
-			RegisterDependency(nameof(Products), nameof(IsEmpty));
 			RegisterDependency(nameof(Products), nameof(HasItems));
 		}
 	}

@@ -8,7 +8,7 @@
 			 core:ViewModelLocator.AutoWireViewModel="True"
 			 BackgroundColor="WhiteSmoke">
 	<AbsoluteLayout>
-		<StackLayout IsVisible="{Binding IsEmpty}" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
+		<StackLayout IsVisible="{Binding HasItems, Converter={StaticResource InverseBooleanConverter}}" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
 			<Image Source="ic_shopping_cart" VerticalOptions="EndAndExpand" Margin="0,0,0,10" />
 			<Label Text="Your cart is empty!" TextColor="Gray" FontSize="Large" HorizontalTextAlignment="Center" Margin="0,0,0,50" />
 			<Label Text="Add items to your cart" TextColor="Gray" FontSize="Medium" HorizontalTextAlignment="Center" Margin="0,0,0,10" />
