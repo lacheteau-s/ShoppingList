@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ShoppingList.ViewModels
 {
-    public class ProductViewModel
+    public class ProductViewModel : BaseViewModel
     {
 		public string Name { get; set; }
 

@@ -4,37 +4,37 @@ using ShoppingList.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ShoppingList.ViewModels
 {
-    public class HomeViewModel : ObservableObject
+    public class HomeViewModel : BaseViewModel
     {
 		private readonly IEventDispatcher _eventDispatcher;
+		private readonly IProductService _productService;
 
-		private bool _isEmpty;
-		private bool _hasItems;
+		public bool IsEmpty => !Products.Any();
 
-		public bool IsEmpty
-		{
-			get { return _isEmpty; }
-			set { SetProperty(ref _isEmpty, value); }
-		}
-
-		public bool HasItems
-		{
-			get { return _hasItems; }
-			set { SetProperty(ref _hasItems, value); }
-		}
+		public bool HasItems => Products.Any();
 
 		public ObservableCollection<ProductViewModel> Products { get; set; }
 
-		public HomeViewModel(IEventDispatcher eventDispatcher)
+		public HomeViewModel(IEventDispatcher eventDispatcher, IProductService productService)
 		{
 			_eventDispatcher = eventDispatcher;
+			_productService = productService;
+
 			Products = new ObservableCollection<ProductViewModel>();
-			IsEmpty = true;
-			HasItems = false;
+		}
+
+		public override async Task InitializeAsync()
+		{
+			var selected = await _productService.GetSelectedProducts();
+
+			if (selected.Any())
+				Products = new ObservableCollection<ProductViewModel>(selected.Select(m => new ProductViewModel(m)));
 		}
 
 		public void Subscribe()
@@ -52,9 +52,12 @@ namespace ShoppingList.ViewModels
 			Unsubscribe();
 
 			Products.Add(new ProductViewModel((ProductModel)payload));
-
-			IsEmpty = false;
-			HasItems = true;
 		}
-    }
+
+		protected override void RegisterDependencies()
+		{
+			RegisterDependency(nameof(Products), nameof(IsEmpty));
+			RegisterDependency(nameof(Products), nameof(HasItems));
+		}
+	}
 }

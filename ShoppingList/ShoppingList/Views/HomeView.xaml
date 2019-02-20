@@ -25,6 +25,10 @@
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
+			<Button Text="Add new item" TextColor="White" BackgroundColor="#007ACC" VerticalOptions="StartAndExpand" HorizontalOptions="Center"
+					WidthRequest="130" HeightRequest="65"
+					android:Button.UseDefaultPadding="True" android:Button.UseDefaultShadow="True"
+					Clicked="OnAddNewItemClicked" />
 		</StackLayout>
 	</AbsoluteLayout>
 </ContentPage>

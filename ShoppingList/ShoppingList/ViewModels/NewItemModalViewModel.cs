@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingList.ViewModels
 {
-    public class NewItemModalViewModel : ObservableObject
+    public class NewItemModalViewModel : BaseViewModel
     {
 		private readonly IProductService _productService;
 		private readonly IEventDispatcher _eventDispatcher;

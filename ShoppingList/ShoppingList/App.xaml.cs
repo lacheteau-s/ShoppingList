@@ -20,6 +20,7 @@ namespace ShoppingList
 		{
 			InitializeComponent();
 			InitializeIoC();
+			InitializeDatabase();
 
 			MainPage = IoC.GetInstance<HomeView>();
 		}
@@ -36,11 +37,6 @@ namespace ShoppingList
 			IoC.RegisterSingleton<IEventDispatcher, EventDispatcher>();
 		}
 
-		protected override async void OnStart()
-		{
-			await InitializeDatabase();
-		}
-
 		protected override async void OnSleep()
 		{
 			var dbService = IoC.GetInstance<IDatabaseService>();
@@ -55,15 +51,15 @@ namespace ShoppingList
 			dbService.CreateConnectionAsync(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "shoppingList.db3"));
 		}
 
-		private async Task InitializeDatabase()
+		private void InitializeDatabase()
 		{
 			var dbService = IoC.GetInstance<IDatabaseService>();
 
-			await dbService.CreateConnectionAsync(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "shoppingList.db3"));
+			dbService.CreateConnectionAsync(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "shoppingList.db3")).Wait();
 			var table = dbService.DbContext?.TableMappings.SingleOrDefault(t => t.TableName == "Product");
 
 			if (table == null)
-				await dbService.CreateTableAsync<ProductEntity>();
+				dbService.CreateTableAsync<ProductEntity>().Wait();
 		}
 	}
 }

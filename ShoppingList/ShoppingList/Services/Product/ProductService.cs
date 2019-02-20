@@ -3,6 +3,7 @@ using ShoppingList.Data.Entities;
 using ShoppingList.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +30,19 @@ namespace ShoppingList.Services
 
 			var id = await _productRepository.InsertAsync(entity);
 			var item = await _productRepository.GetAsync(id);
+		}
+
+		public async Task<List<ProductModel>> GetSelectedProducts()
+		{
+			var products = await _productRepository.GetAsync(x => x.Selected);
+
+			return products.Select(p => new ProductModel
+			{
+				// TODO: Id in model?
+				Name = p.Name,
+				Price = p.Price,
+				Quantity = p.Quantity,
+			}).ToList();
 		}
 	}
 }
