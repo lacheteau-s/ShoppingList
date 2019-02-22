@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:renderers="clr-namespace:ShoppingList.Renderers;assembly=ShoppingList"
+             x:Class="ShoppingList.Views.ProductCellView">
+	<StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" Margin="10,0">
+		<StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+			<Label Text="{Binding QuantityAndName}" FontSize="Medium" />
+			<StackLayout Orientation="Horizontal">
+				<Label Text="{Binding TotalPrice}" FontSize="Small" />
+				<Label Text="{Binding UnitPrice}" FontSize="Small" FontAttributes="Italic" />
+			</StackLayout>
+		</StackLayout>
+		<renderers:MyCheckBox />
+	</StackLayout>
+</ViewCell>

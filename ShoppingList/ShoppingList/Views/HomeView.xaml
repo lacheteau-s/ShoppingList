@@ -5,6 +5,7 @@
              x:Class="ShoppingList.Views.HomeView"
 			 xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
 			 xmlns:core="clr-namespace:ShoppingList.Core"
+			 xmlns:views="clr-namespace:ShoppingList.Views"
 			 core:ViewModelLocator.AutoWireViewModel="True"
 			 BackgroundColor="WhiteSmoke">
 	<AbsoluteLayout>
@@ -18,14 +19,14 @@
 					Clicked="OnAddNewItemClicked" />
 		</StackLayout>
 		<StackLayout IsVisible="{Binding HasItems}" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
-			<ListView ItemsSource="{Binding Products}">
+			<ListView ItemsSource="{Binding Products}" RowHeight="60" VerticalOptions="FillAndExpand">
 				<ListView.ItemTemplate>
 					<DataTemplate>
-						<TextCell Text="{Binding Name}" />
+						<views:ProductCellView />
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
-			<Button Text="Add new item" TextColor="White" BackgroundColor="#007ACC" VerticalOptions="StartAndExpand" HorizontalOptions="Center"
+			<Button Text="Add new item" TextColor="White" BackgroundColor="#007ACC" VerticalOptions="End" HorizontalOptions="Center"
 					WidthRequest="130" HeightRequest="65"
 					android:Button.UseDefaultPadding="True" android:Button.UseDefaultShadow="True"
 					Clicked="OnAddNewItemClicked" />
