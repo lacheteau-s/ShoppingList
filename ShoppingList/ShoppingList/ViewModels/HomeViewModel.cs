@@ -17,14 +17,14 @@ namespace ShoppingList.ViewModels
 
 		public bool HasItems => Products.Any();
 
-		public ObservableCollection<ProductViewModel> Products { get; set; }
+		public ObservableCollection<ProductCellViewModel> Products { get; set; }
 
 		public HomeViewModel(IEventDispatcher eventDispatcher, IProductService productService)
 		{
 			_eventDispatcher = eventDispatcher;
 			_productService = productService;
 
-			Products = new ObservableCollection<ProductViewModel>();
+			Products = new ObservableCollection<ProductCellViewModel>();
 		}
 
 		public override async Task InitializeAsync()
@@ -32,7 +32,7 @@ namespace ShoppingList.ViewModels
 			var selected = await _productService.GetSelectedProducts();
 
 			if (selected.Any())
-				Products = new ObservableCollection<ProductViewModel>(selected.Select(m => new ProductViewModel(m)));
+				Products = new ObservableCollection<ProductCellViewModel>(selected.Select(m => new ProductCellViewModel(m)));
 		}
 
 		public void Subscribe()
@@ -49,7 +49,7 @@ namespace ShoppingList.ViewModels
 		{
 			Unsubscribe();
 
-			Products.Add(new ProductViewModel((ProductModel)payload));
+			Products.Add(new ProductCellViewModel((ProductModel)payload));
 		}
 
 		protected override void RegisterDependencies()

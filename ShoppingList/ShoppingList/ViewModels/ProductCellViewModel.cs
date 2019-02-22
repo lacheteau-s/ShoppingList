@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ShoppingList.ViewModels
 {
-    public class ProductViewModel : BaseViewModel
+    public class ProductCellViewModel : BaseViewModel
     {
 		public string Name { get; set; }
 
@@ -19,7 +19,7 @@ namespace ShoppingList.ViewModels
 
 		public string UnitPrice => (Price > 0 && Quantity > 1) ? $"({Price}€ / unit)" : "";
 
-		public ProductViewModel(ProductModel product)
+		public ProductCellViewModel(ProductModel product)
 		{
 			Name = product.Name;
 			Quantity = product.Quantity;
