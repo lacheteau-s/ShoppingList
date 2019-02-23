@@ -14,15 +14,17 @@ namespace ShoppingList.ViewModels
     {
 		private readonly IEventDispatcher _eventDispatcher;
 		private readonly IProductService _productService;
+		private readonly INavigationService _navigationService;
 
 		public bool HasItems => Products.Any();
 
 		public ObservableCollection<ProductCellViewModel> Products { get; set; }
 
-		public HomeViewModel(IEventDispatcher eventDispatcher, IProductService productService)
+		public HomeViewModel(IEventDispatcher eventDispatcher, IProductService productService, INavigationService navigationService)
 		{
 			_eventDispatcher = eventDispatcher;
 			_productService = productService;
+			_navigationService = navigationService;
 
 			Products = new ObservableCollection<ProductCellViewModel>();
 		}
@@ -43,6 +45,11 @@ namespace ShoppingList.ViewModels
 		public void Unsubscribe()
 		{
 			_eventDispatcher.Unsubscribe(Events.ItemAdded, this);
+		}
+
+		public Task OpenNewItemModalAsync()
+		{
+			return _navigationService.NavigateToAsync<NewItemModalViewModel>(true);
 		}
 
 		private void OnNewItemAdded(object payload)
