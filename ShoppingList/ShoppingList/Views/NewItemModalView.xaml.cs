@@ -32,13 +32,13 @@ namespace ShoppingList.Views
 			}
 			finally
 			{
-				await Navigation.PopModalAsync();
+				await _viewModel.CloseAsync();
 			}
 		}
 
         public async void OnCancelClicked(object sender, EventArgs e)
         {
-			await Navigation.PopModalAsync();
+			await _viewModel.CloseAsync();
         }
 
 		public void OnIncrementQuantityClicked(object sender, EventArgs e)

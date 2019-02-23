@@ -9,5 +9,6 @@ namespace ShoppingList.Services
 	{
 		void Map<TViewModel, TView>();
 		Task NavigateToAsync<TViewModel>(bool isModal = false);
+		Task NavigateBackAsync();
 	}
 }

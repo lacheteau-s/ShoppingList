@@ -30,5 +30,16 @@ namespace ShoppingList.Services
 			else
 				return _navigation.PushAsync(viewInstance);
 		}
+
+		public Task NavigateBackAsync()
+		{
+			// Xamarin Forms' INavigation contains 2 separate stacks for modal and regular views.
+			// The following schema assumes that when the ModalStack > 0, the currently displayed view is a modal
+			// The following scenario would be problematic: Home > Navigate to modal (ModalStack = 1) > Navigate to regular view > Navigate to regular view?
+			if (_navigation.ModalStack.Count > 0)
+				return _navigation.PopModalAsync();
+			else
+				return _navigation.PopAsync();
+		}
 	}
 }
