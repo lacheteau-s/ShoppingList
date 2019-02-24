@@ -52,6 +52,7 @@ namespace ShoppingList.ViewModels
 			_eventDispatcher.Unsubscribe(Events.ItemAdded, this);
 
 			Products.Add(new ProductCellViewModel((ProductModel)payload));
+			RaisePropertyChanged(nameof(Products));
 		}
 
 		protected override void RegisterDependencies()
