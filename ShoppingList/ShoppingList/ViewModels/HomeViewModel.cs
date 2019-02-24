@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace ShoppingList.ViewModels
 {
@@ -19,6 +21,8 @@ namespace ShoppingList.ViewModels
 		public bool HasItems => Products.Any();
 
 		public ObservableCollection<ProductCellViewModel> Products { get; set; }
+
+		public ICommand AddNewItemCommand => new Command(OnAddNewItem);
 
 		public HomeViewModel(IEventDispatcher eventDispatcher, IProductService productService, INavigationService navigationService)
 		{
@@ -37,24 +41,16 @@ namespace ShoppingList.ViewModels
 				Products = new ObservableCollection<ProductCellViewModel>(selected.Select(m => new ProductCellViewModel(m)));
 		}
 
-		public void Subscribe()
+		public async void OnAddNewItem()
 		{
 			_eventDispatcher.Subscribe(Events.ItemAdded, this, OnNewItemAdded);
-		}
 
-		public void Unsubscribe()
-		{
-			_eventDispatcher.Unsubscribe(Events.ItemAdded, this);
-		}
-
-		public Task OpenNewItemModalAsync()
-		{
-			return _navigationService.NavigateToAsync<NewItemModalViewModel>(true);
+			await _navigationService.NavigateToAsync<NewItemModalViewModel>(true);
 		}
 
 		private void OnNewItemAdded(object payload)
 		{
-			Unsubscribe();
+			_eventDispatcher.Unsubscribe(Events.ItemAdded, this);
 
 			Products.Add(new ProductCellViewModel((ProductModel)payload));
 		}

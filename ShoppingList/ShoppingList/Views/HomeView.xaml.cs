@@ -11,17 +11,9 @@ namespace ShoppingList.Views
 {
 	public partial class HomeView : ContentPage
 	{
-        private HomeViewModel _viewModel => (HomeViewModel)BindingContext;
-
 		public HomeView()
 		{
 			InitializeComponent();
-		}
-
-		private async void OnAddNewItemClicked(object sender, EventArgs e)
-		{
-			_viewModel.Subscribe();
-			await _viewModel.OpenNewItemModalAsync(); // TODO: replace by Command
 		}
 	}
 }
