@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace ShoppingList.ViewModels
 {
@@ -40,6 +42,14 @@ namespace ShoppingList.ViewModels
 
 		public string Subtotal => $"{Quantity * Price} €"; // TODO: currency configuration
 
+		public ICommand DecrementQuantityCommand => new Command(OnDecrementQuantity);
+
+		public ICommand IncrementQuantityCommand => new Command(OnIncrementQuantity);
+
+		public ICommand OkCommand => new Command(OnOk);
+
+		public ICommand CancelCommand => new Command(OnCancel);
+
 		public NewItemModalViewModel(IProductService productService, IEventDispatcher eventDispatcher, INavigationService navigationService)
 		{
 			_productService = productService;
@@ -51,7 +61,19 @@ namespace ShoppingList.ViewModels
 			Price = 0;
 		}
 
-		public async Task OnOkAsync()
+		public void OnDecrementQuantity()
+		{
+			if (Quantity > 1)
+				Quantity--;
+		}
+
+		public void OnIncrementQuantity()
+		{
+			if (Quantity < 100)
+				Quantity++;
+		}
+
+		public async void OnOk()
 		{
 			var model = new ProductModel()
 			{
@@ -60,26 +82,25 @@ namespace ShoppingList.ViewModels
 				Price = Price
 			};
 
-			await _productService.AddNewProductAsync(model);
+			try
+			{
+				await _productService.AddNewProductAsync(model);
 
-			_eventDispatcher.Publish(Events.ItemAdded, model);
+				_eventDispatcher.Publish(Events.ItemAdded, model);
+			}
+			catch (Exception)
+			{
+				// TODO
+			}
+			finally
+			{
+				await _navigationService.NavigateBackAsync();
+			}
 		}
 
-		public Task CloseAsync()
+		public async void OnCancel()
 		{
-			return _navigationService.NavigateBackAsync();
-		}
-
-		public void IncrementQuantity()
-		{
-			if (Quantity < 100)
-				Quantity++;
-		}
-
-		public void DecrementQuantity()
-		{
-			if (Quantity > 1)
-				Quantity--;
+			await _navigationService.NavigateBackAsync();
 		}
 
 		protected override void RegisterDependencies()
