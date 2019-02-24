@@ -14,6 +14,7 @@ namespace ShoppingList.ViewModels
     {
 		private readonly IProductService _productService;
 		private readonly IEventDispatcher _eventDispatcher;
+		private readonly INavigationService _navigationService;
 
         private string _productName;
         private int _quantity;
@@ -39,10 +40,11 @@ namespace ShoppingList.ViewModels
 
 		public string Subtotal => $"{Quantity * Price} €"; // TODO: currency configuration
 
-		public NewItemModalViewModel(IProductService productService, IEventDispatcher eventDispatcher)
+		public NewItemModalViewModel(IProductService productService, IEventDispatcher eventDispatcher, INavigationService navigationService)
 		{
 			_productService = productService;
 			_eventDispatcher = eventDispatcher;
+			_navigationService = navigationService;
 
 			ProductName = null;
 			Quantity = 1;
@@ -61,6 +63,11 @@ namespace ShoppingList.ViewModels
 			await _productService.AddNewProductAsync(model);
 
 			_eventDispatcher.Publish(Events.ItemAdded, model);
+		}
+
+		public Task CloseAsync()
+		{
+			return _navigationService.NavigateBackAsync();
 		}
 
 		public void IncrementQuantity()

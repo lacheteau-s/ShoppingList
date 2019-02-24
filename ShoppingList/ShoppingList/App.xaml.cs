@@ -21,6 +21,7 @@ namespace ShoppingList
 			InitializeComponent();
 			InitializeIoC();
 			InitializeDatabase();
+			InitializeNavigation();
 
 			MainPage = IoC.GetInstance<HomeView>();
 		}
@@ -35,6 +36,14 @@ namespace ShoppingList
 			IoC.RegisterSingleton<IProductService, ProductService>();
 			IoC.RegisterSingleton<IAsyncRepository<ProductEntity>, AsyncRepository<ProductEntity>>();
 			IoC.RegisterSingleton<IEventDispatcher, EventDispatcher>();
+			IoC.RegisterSingleton<INavigationService, NavigationService>();
+		}
+
+		private void InitializeNavigation()
+		{
+			var navigationService = IoC.GetInstance<INavigationService>();
+
+			navigationService.Map<NewItemModalViewModel, NewItemModalView>();
 		}
 
 		protected override async void OnSleep()
