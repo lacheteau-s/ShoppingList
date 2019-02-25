@@ -13,10 +13,10 @@
 			<Image Source="ic_shopping_cart" VerticalOptions="EndAndExpand" Margin="0,0,0,10" />
 			<Label Text="Your cart is empty!" TextColor="Gray" FontSize="Large" HorizontalTextAlignment="Center" Margin="0,0,0,50" />
 			<Label Text="Add items to your cart" TextColor="Gray" FontSize="Medium" HorizontalTextAlignment="Center" Margin="0,0,0,10" />
-			<Button Text="Add new item" TextColor="White" BackgroundColor="#007ACC" VerticalOptions="StartAndExpand" HorizontalOptions="Center"
+			<Button Text="Add item" TextColor="White" BackgroundColor="#007ACC" VerticalOptions="StartAndExpand" HorizontalOptions="Center"
 					WidthRequest="130" HeightRequest="65"
 					android:Button.UseDefaultPadding="True" android:Button.UseDefaultShadow="True"
-					Command="{Binding AddNewItemCommand}" />
+					Command="{Binding AddItemCommand}" />
 		</StackLayout>
 		<StackLayout IsVisible="{Binding HasItems}" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
 			<ListView ItemsSource="{Binding Products}" RowHeight="60" VerticalOptions="FillAndExpand">
@@ -26,10 +26,10 @@
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
-			<Button Text="Add new item" TextColor="White" BackgroundColor="#007ACC" VerticalOptions="End" HorizontalOptions="Center"
+			<Button Text="Add item" TextColor="White" BackgroundColor="#007ACC" VerticalOptions="End" HorizontalOptions="Center"
 					WidthRequest="130" HeightRequest="65"
 					android:Button.UseDefaultPadding="True" android:Button.UseDefaultShadow="True"
-					Command="{Binding AddNewItemCommand}" />
+					Command="{Binding AddItemCommand}" />
 		</StackLayout>
 	</AbsoluteLayout>
 </ContentPage>

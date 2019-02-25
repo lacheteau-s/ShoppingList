@@ -21,7 +21,7 @@ namespace ShoppingList.ViewModels
 
 		public ObservableCollection<ProductCellViewModel> Products { get; set; }
 
-		public ICommand AddNewItemCommand => new Command(OnAddNewItem);
+		public ICommand AddItemCommand => new Command(OnAddItem);
 
 		public HomeViewModel(IEventDispatcher eventDispatcher, IProductService productService, INavigationService navigationService)
 		{
@@ -40,14 +40,19 @@ namespace ShoppingList.ViewModels
 				Products = new ObservableCollection<ProductCellViewModel>(selected.Select(m => new ProductCellViewModel(m)));
 		}
 
-		public async void OnAddNewItem()
+		public async void OnAddItem()
 		{
-			_eventDispatcher.Subscribe(Events.ItemAdded, this, OnNewItemAdded);
+			_eventDispatcher.Subscribe(Events.ItemAdded, this, OnItemAdded);
 
-			await _navigationService.NavigateToAsync<NewItemModalViewModel>(true);
+			var hasUnselectedProducts = await _productService.HasUnselectedProducts();
+
+			if (hasUnselectedProducts)
+				await _navigationService.NavigateToAsync<ProductInventoryViewModel>();
+			else
+				await _navigationService.NavigateToAsync<NewItemModalViewModel>(true);
 		}
 
-		private void OnNewItemAdded(object payload)
+		private void OnItemAdded(object payload)
 		{
 			_eventDispatcher.Unsubscribe(Events.ItemAdded, this);
 

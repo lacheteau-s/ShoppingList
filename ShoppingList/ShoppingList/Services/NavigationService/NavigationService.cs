@@ -11,24 +11,26 @@ namespace ShoppingList.Services
 {
 	public class NavigationService : INavigationService
 	{
-		INavigation _navigation => Application.Current.MainPage.Navigation;
+		NavigationPage _navigationPage => (NavigationPage)Application.Current.MainPage;
+
+		INavigation _navigation => _navigationPage.Navigation;
 
 		private static readonly Dictionary<string, Type> _mapping = new Dictionary<string, Type>();
 
 		public void Map<TViewModel, TView>()
 		{
-			_mapping.Add(nameof(TViewModel), typeof(TView));
+			_mapping.Add(typeof(TViewModel).Name, typeof(TView));
 		}
 
 		public Task NavigateToAsync<TViewModel>(bool isModal = false)
 		{
-			var viewType = _mapping[nameof(TViewModel)];
+			var viewType = _mapping[typeof(TViewModel).Name];
 			var viewInstance = (Page)IoC.GetInstance(viewType);
 
 			if (isModal)
 				return _navigation.PushModalAsync(viewInstance);
 			else
-				return _navigation.PushAsync(viewInstance);
+				return _navigationPage.PushAsync(viewInstance);
 		}
 
 		public Task NavigateBackAsync()
@@ -39,7 +41,7 @@ namespace ShoppingList.Services
 			if (_navigation.ModalStack.Count > 0)
 				return _navigation.PopModalAsync();
 			else
-				return _navigation.PopAsync();
+				return _navigationPage.PopAsync();
 		}
 	}
 }

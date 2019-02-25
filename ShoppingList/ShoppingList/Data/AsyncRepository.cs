@@ -2,6 +2,7 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,11 @@ namespace ShoppingList.Data
 		public AsyncRepository(IDatabaseService databaseService)
 		{
 			_dbService = databaseService;
+		}
+
+		public AsyncTableQuery<T> AsQueryable()
+		{
+			return _dbContext.Table<T>();
 		}
 
 		public Task DeleteAsync(T entity)

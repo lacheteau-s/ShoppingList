@@ -10,5 +10,6 @@ namespace ShoppingList.Services
 	{
 		Task AddNewProductAsync(ProductModel product);
 		Task<List<ProductModel>> GetSelectedProducts();
+		Task<bool> HasUnselectedProducts();
 	}
 }

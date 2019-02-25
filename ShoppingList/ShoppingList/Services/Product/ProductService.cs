@@ -44,5 +44,12 @@ namespace ShoppingList.Services
 				Quantity = p.Quantity,
 			}).ToList();
 		}
+
+		public async Task<bool> HasUnselectedProducts()
+		{
+			var first = await _productRepository.AsQueryable().FirstOrDefaultAsync(x => !x.Selected);
+
+			return first != null;
+		}
 	}
 }
