@@ -11,6 +11,6 @@
 				<Label Text="{Binding UnitPrice}" FontSize="Small" FontAttributes="Italic" />
 			</StackLayout>
 		</StackLayout>
-		<renderers:MyCheckBox />
+		<renderers:CheckBox IsVisible="{Binding IsSelectable}" IsChecked="{Binding IsSelected, Mode=TwoWay}" Command="{Binding OnTest}" />
 	</StackLayout>
 </ViewCell>

@@ -1,7 +1,9 @@
-﻿using ShoppingList.Models;
+﻿using ShoppingList.Core;
+using ShoppingList.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace ShoppingList.ViewModels
 {
@@ -19,11 +21,36 @@ namespace ShoppingList.ViewModels
 
 		public string UnitPrice => (Price > 0 && Quantity > 1) ? $"({Price}€ / unit)" : "";
 
-		public ProductCellViewModel(ProductModel product)
+		private bool _isSelectable;
+
+		public bool IsSelectable
+		{
+			get { return _isSelectable; }
+			set { SetProperty(ref _isSelectable, value); }
+		}
+
+		private bool _isSelected;
+
+		public bool IsSelected
+		{
+			get { return _isSelected; }
+			set { SetProperty(ref _isSelected, value); }
+		}
+
+		public ICommand CheckedCommand => new Command(() => IsSelected = !IsSelected);
+
+		public ProductCellViewModel(ProductModel product, bool isSelectable = false)
 		{
 			Name = product.Name;
 			Quantity = product.Quantity;
 			Price = product.Price;
+			IsSelectable = isSelectable;
+			IsSelected = true;
+			PropertyChanged += ProductCellViewModel_PropertyChanged;
 		}
-    }
+
+		private void ProductCellViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+		}
+	}
 }

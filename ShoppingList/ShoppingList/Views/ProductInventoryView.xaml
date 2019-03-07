@@ -1,14 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ 			 xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
 			 xmlns:core="clr-namespace:ShoppingList.Core"
+			 xmlns:views="clr-namespace:ShoppingList.Views"
              x:Class="ShoppingList.Views.ProductInventoryView"
 			 core:ViewModelLocator.AutoWireViewModel="True">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+	<AbsoluteLayout>
+		<StackLayout IsVisible="{Binding HasItems}" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
+			<ListView ItemsSource="{Binding Products}" RowHeight="60" VerticalOptions="FillAndExpand">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<views:ProductCellView />
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+			<StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="FillAndExpand">
+				<Button Text="Add new item" TextColor="White" BackgroundColor="#007ACC"
+					WidthRequest="130" HeightRequest="65"
+					android:Button.UseDefaultPadding="True" android:Button.UseDefaultShadow="True"
+					Command="{Binding AddItemCommand}" />
+				<Button Command="{Binding ToggleSelectionModeCommand}">
+					<Button.Triggers>
+						<DataTrigger TargetType="Button" Binding="{Binding IsMultiselectActive}" Value="True">
+							<Setter Property="Text" Value="Multiselect" />
+						</DataTrigger>
+						<DataTrigger TargetType="Button" Binding="{Binding IsMultiselectActive}" Value="False">
+							<Setter Property="Text" Value="Single select" />
+						</DataTrigger>
+					</Button.Triggers>
+				</Button>
+			</StackLayout>
+		</StackLayout>
+	</AbsoluteLayout>
 </ContentPage>

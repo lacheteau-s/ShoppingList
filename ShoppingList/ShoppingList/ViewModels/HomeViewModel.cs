@@ -45,7 +45,7 @@ namespace ShoppingList.ViewModels
 			_eventDispatcher.Subscribe(Events.ItemAdded, this, OnItemAdded);
 
 			var hasUnselectedProducts = await _productService.HasUnselectedProducts();
-
+			hasUnselectedProducts = true;
 			if (hasUnselectedProducts)
 				await _navigationService.NavigateToAsync<ProductInventoryViewModel>();
 			else
@@ -56,7 +56,7 @@ namespace ShoppingList.ViewModels
 		{
 			_eventDispatcher.Unsubscribe(Events.ItemAdded, this);
 
-			Products.Add(new ProductCellViewModel((ProductModel)payload));
+			Products.Add(new ProductCellViewModel((ProductModel)payload, true));
 			RaisePropertyChanged(nameof(Products));
 		}
 
